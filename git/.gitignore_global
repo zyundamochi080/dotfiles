@@ -1,0 +1,23 @@
+# ~/.gitignore_global
+# どのプロジェクトでもコミットしたくない、環境由来のファイル
+# （プロジェクト固有の除外は各リポジトリの .gitignore に書く）
+
+# macOS
+.DS_Store
+.AppleDouble
+._*
+
+# Windows
+Thumbs.db
+Desktop.ini
+
+# エディタ
+*.swp
+*.swo
+*~
+.idea/
+.vscode/
+
+# その他
+*.log
+.env.local

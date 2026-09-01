@@ -1,0 +1,106 @@
+# ~/.gitconfig
+# 個人設定（名前・メール等）は ~/.gitconfig.local に分離して、
+# このファイル自体は公開リポジトリに置ける状態を保つ
+
+[include]
+	# マシン固有・非公開の設定（user.name / user.email / 認証情報など）
+	# 例: ~/.gitconfig.local
+	#   [user]
+	#       name = KG
+	#       email = xxx@example.com
+	path = ~/.gitconfig.local
+
+[init]
+	# 新規リポジトリのデフォルトブランチ名（master 派なら master に）
+	defaultBranch = main
+
+[core]
+	editor = vim
+	# グローバルな gitignore（.DS_Store などプロジェクト非依存の除外はこちらへ）
+	excludesfile = ~/.gitignore_global
+	# 日本語ファイル名を \346\227\245... とエスケープ表示しない
+	quotepath = false
+	# コミット時に CRLF -> LF に変換（macOS/Linux 向け）
+	autocrlf = input
+
+[color]
+	ui = auto
+
+[column]
+	# branch / status などの一覧を段組み表示して見やすく
+	ui = auto
+
+[branch]
+	# git branch を最終コミットが新しい順に並べる
+	sort = -committerdate
+
+[tag]
+	# v1.0.0 < v1.10.0 のようにバージョン番号として正しく並べる
+	sort = version:refname
+
+[diff]
+	# デフォルトより賢い diff アルゴリズム
+	algorithm = histogram
+	# 移動しただけの行を「追加+削除」ではなく移動として色分け
+	colorMoved = plain
+	# a/ b/ の代わりに i/(index) w/(working) など意味のあるプレフィックス
+	mnemonicPrefix = true
+	# リネームを検出する
+	renames = true
+
+[merge]
+	# コンフリクト表示に「共通祖先」も表示する（解決が格段に楽になる）
+	conflictstyle = zdiff3
+
+[pull]
+	# pull 時にマージコミットを作らず rebase する
+	# （マージ派なら false にして ff = only を推奨）
+	rebase = true
+
+[fetch]
+	# リモートで消えたブランチ/タグをローカルの追跡からも削除
+	prune = true
+	pruneTags = true
+	all = true
+
+[push]
+	# 現在のブランチを同名のリモートブランチへ push
+	default = simple
+	# 初回 push 時の --set-upstream を自動化
+	autoSetupRemote = true
+	followTags = true
+
+[rebase]
+	# fixup! / squash! コミットを rebase -i で自動的に並べ替え
+	autoSquash = true
+	# rebase 前に未コミットの変更を自動 stash / 復元
+	autoStash = true
+	# スタックしたブランチを rebase したとき途中のブランチも一緒に更新
+	updateRefs = true
+
+[rerere]
+	# 一度解決したコンフリクトを記録し、同じコンフリクトを自動解決
+	enabled = true
+	autoupdate = true
+
+[commit]
+	# コミットメッセージ編集画面に diff を表示（書き忘れ・入れ忘れ防止）
+	verbose = true
+
+[help]
+	# タイポしたコマンドの実行前に候補を確認してくれる
+	autocorrect = prompt
+
+[alias]
+	st = status --short --branch
+	co = checkout
+	sw = switch
+	br = branch
+	ci = commit
+	amend = commit --amend --no-edit
+	# 直前のコミットを取り消す（変更はステージに残す）
+	undo = reset --soft HEAD^
+	# グラフ付きの見やすいログ
+	lg = log --graph --pretty=format:'%C(yellow)%h%Creset -%C(auto)%d%Creset %s %C(green)(%cr) %C(bold blue)<%an>%Creset'
+	# push 済みブランチ整理: マージ済みローカルブランチを削除
+	cleanup = "!git branch --merged | grep -vE '\\*|master|main' | xargs -r git branch -d"

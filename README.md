@@ -7,10 +7,10 @@
 
 | フォルダ | 内容 |
 | --- | --- |
-| `zsh/` | zsh の設定（`.zshrc`, `.zprofile`） |
 | `bash/` | bash の設定（`.bashrc`） |
-| `vim/` | Vim の設定（`.vimrc`） |
 | `git/` | Git の設定（`.gitconfig`, `.gitignore_global`） |
+| `vim/` | Vim の設定（`.vimrc`） |
+| `zsh/` | zsh の設定（`.zshrc`, `.zprofile`） |
 
 各フォルダ（Stow では「パッケージ」と呼びます）の中身は、**ホームディレクトリから見た相対パスと同じ構成**にしています。
 
