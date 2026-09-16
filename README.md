@@ -8,6 +8,7 @@
 | フォルダ | 内容 |
 | --- | --- |
 | `bash/` | bash の設定（`.bashrc`） |
+| `claude/` | Claude Code の設定（`~/.claude/CLAUDE.md`, `settings.json`） |
 | `git/` | Git の設定（`.gitconfig`, `.gitignore_global`） |
 | `vim/` | Vim の設定（`.vimrc`） |
 | `zsh/` | zsh の設定（`.zshrc`, `.zprofile`） |
@@ -15,8 +16,9 @@
 各フォルダ（Stow では「パッケージ」と呼びます）の中身は、**ホームディレクトリから見た相対パスと同じ構成**にしています。
 
 ```
-zsh/.zshrc                  ->  ~/.zshrc
+claude/.claude/CLAUDE.md    ->  ~/.claude/CLAUDE.md
 git/.gitconfig              ->  ~/.gitconfig
+zsh/.zshrc                  ->  ~/.zshrc
 ```
 
 ## 前提条件
